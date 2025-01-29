@@ -7,6 +7,8 @@ const app = express();
 const appRouter = express.Router();
 const v1Router = express.Router();
 
+app.use(express.json());
+
 app.use('/api', v1Router);
 routerApi(appRouter);
 v1Router.use('/v1', appRouter)
