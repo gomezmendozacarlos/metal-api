@@ -37,7 +37,6 @@ router.patch('/:id', async (req, res) => {
       message: error.message
     });
   }
-
 });
 
 router.delete('/:id', async (req, res) => {

@@ -1,28 +1,44 @@
 const express = require('express');
+const EventsService = require('../services/events.service');
 
 const router = express.Router();
+const service = new EventsService();
 
-router.get('/', (req, res) => {
-  res.json({
-    bands: [],
-    cost: {
-      dia: "200",
-      pre: "150",
-      vip: "250"
-    },
-    date: "2023-01-01",
-    flyer: "",
-    time: "20:00",
-    venue: {
-      address: "Epigmenio Gonz lez 66, Centro, 44100 Guadalajara, Jal.",
-      capacity: 2000,
-      city: "Guadalajara",
-      name: "Foro Independencia",
-      state: "Jalisco"
-    },
-    id: 1
+  router.get('/', async (req, res) => {
+    const event = await service.find();
+    res.json(event);
   });
-})
+
+  router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    const event = await service.findOne(id);
+    res.json(event);
+  });
+
+  router.post('/', async (req, res) => {
+    const body = req.body;
+    const newEvent = await service.create(body);
+    res.status(201).json(newEvent);
+  });
+
+  router.patch('/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const product = await service.update(id, body);
+      res.json(product);
+    } catch (error) {
+      res.status(404).json({
+        message: error.message
+      });
+    }
+  });
+
+  router.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+    const rta = await service.delete(id);
+    res.json(rta);
+  });
 
 
 module.exports = router;
