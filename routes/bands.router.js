@@ -22,8 +22,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   const body = req.body;
-  const newProduct = await service.create(body);
-  res.status(201).json(newProduct);
+  const newBand = await service.create(body);
+  res.status(201).json(newBand);
 });
 
 router.patch('/:id', async (req, res) => {

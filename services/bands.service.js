@@ -32,7 +32,7 @@ class ProductsService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(this.bands);
-      }, 5000);
+      });
     })
   }
 
