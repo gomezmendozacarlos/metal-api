@@ -1,13 +1,13 @@
 const express = require('express');
 
-const ProductsService = require('../services/bands.service');
+const BandsService = require('../services/bands.service');
 
 const router = express.Router();
-const service = new ProductsService();
+const service = new BandsService();
 
 router.get('/', async (req, res) => {
-  const products = await service.find();
-  res.json(products);
+  const bands = await service.find();
+  res.json(bands);
 });
 
 router.get('/filter', (req, res) => {
